@@ -11,11 +11,11 @@ RUN pip3 install py4j \
     jupyter \
     matplotlib \
     pandas \
-    sklearn \
+    sklearn
 
 RUN cd /tmp/;\
     wget https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz \
-    --progress=dot;\
+    -nv;\
     mkdir /opt/spark;\
     cd /opt/spark/;\
     tar -xzf /tmp/spark-2.1.1-bin-hadoop2.7.tgz;\
@@ -26,6 +26,8 @@ WORKDIR /nbhome
 
 ENV PYSPARK_PYTHON "python3"
 ENV PYTHONPATH "/opt/spark/spark-2.1.1-bin-hadoop2.7/python"
+
+COPY run.sh ./
 
 EXPOSE 8888
 CMD ["sh", "run.sh"]
